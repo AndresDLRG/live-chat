@@ -1,7 +1,7 @@
 package com.andresdlrg.livechat.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 import org.dizitart.no2.IndexType;
 import org.dizitart.no2.objects.Index;
@@ -17,17 +17,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Indices({
-    @Index(value = "timestamp", type = IndexType.NonUnique),
+    @Index(value = "members", type = IndexType.NonUnique),
+    @Index(value = "chatId", type = IndexType.Unique)
 })
-public class ChatMessage implements Serializable{
+public class Chat implements Serializable {
 
-	private static final long serialVersionUID = 3051617307402320295L;
+	private static final long serialVersionUID = 1L;
 
 	private String chatId;
-	private int messageType;
-	private String message;
-	private Date timestamp;
-	private String originator;
-	private String destination;
-	
+	// usernames of participants
+	private List<String> members;
+	private String creatorUsername;
+	private String name;
 }

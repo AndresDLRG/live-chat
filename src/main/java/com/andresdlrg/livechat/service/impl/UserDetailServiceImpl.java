@@ -23,6 +23,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		SystemUser sysUser = nitriteDb.getRepository(SystemUser.class).find(eq("username", username)).firstOrDefault();
+		if (sysUser == null) {
+			throw new UsernameNotFoundException("Username not found");
+		}
 		return new User(sysUser.getUsername(), sysUser.getPassword(), new ArrayList<>());
 	}
 
